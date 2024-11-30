@@ -14,6 +14,7 @@ class DynamicGenerativePrompt:
     dynamic_examples: List[str]
     
     # Optional attributes with default values
+    seed: int = field(default=42)
     wildcard_dir: Path | None = field(default=None)
     wildcard_manager: WildcardManager | None = field(default=None, repr=False)
     random_prompt_generator: RandomPromptGenerator | None = field(default=None, repr=False)
@@ -34,19 +35,20 @@ class DynamicGenerativePrompt:
             
         # Initialize random_prompt_generator if wildcard_manager is provided
         if self.random_prompt_generator is not None:
-            self.random_prompt_generator = RandomPromptGenerator(self.wildcard_manager)
+            self.random_prompt_generator = RandomPromptGenerator(self.wildcard_manager, seed=self.seed)
         
     # Property to generate persona prompt
     @property
     def persona(self) -> str:
-        return self.random_prompt_generator.generate_prompt(self.dynamic_persona)
+        return self.random_prompt_generator.generate(self.dynamic_persona)[0]
     
     # Property to generate instruction prompt
     @property
     def instruction(self) -> str:
-        return self.random_prompt_generator.generate_prompt(self.dynamic_instruction)
+        return self.random_prompt_generator.generate(self.dynamic_instruction)[0]
     
     # Property to generate examples prompt
     @property
     def examples(self) -> List[str]:
-        return self.random_prompt_generator.generate_prompt(self.dynamic_examples)
+        to_ret: List[str] = [self.random_prompt_generator.generate(ex)[0] for ex in self.dynamic_examples]
+        return to_ret
