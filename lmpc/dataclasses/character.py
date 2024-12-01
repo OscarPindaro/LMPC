@@ -30,6 +30,9 @@ class Opinion:
         )
         return f"Opinion(title='{self.title}', content='{capped_content}')"
 
+    def to_markdown(self) -> str:
+        return f"### {self.title}\n{self.content}\n"
+
 
 # Define a dataclass for a character
 @dataclass
