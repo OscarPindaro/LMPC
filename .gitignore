@@ -1,5 +1,6 @@
 data/generated_samples.json
-
+data/generated_qa.json
+data/generated/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

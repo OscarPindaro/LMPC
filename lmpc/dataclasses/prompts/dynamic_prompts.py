@@ -66,3 +66,16 @@ class DynamicGenerativePrompt:
             self.random_prompt_generator.generate(ex)[0] for ex in self.dynamic_examples
         ]
         return to_ret
+
+
+from typing import List
+
+
+def to_dynamic_prompt_string(choices: List[str]) -> str:
+    to_ret = "{"
+    for idx, c in enumerate(choices):
+        to_ret += f"{c}"
+        if idx != len(choices) - 1:
+            to_ret += "|"
+    to_ret += "}"
+    return to_ret
