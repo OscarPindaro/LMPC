@@ -55,7 +55,7 @@ class QAPair:
         """Read QAPair(s) from a JSON file"""
         path = Path(path)
         json_str = path.read_text()
-        return QAPair.from_json(json_str)
+        return QAPair.from_json_str(json_str)
 
     @staticmethod
     def to_json_list(qa_pairs: List["QAPair"], path: Path) -> None:
