@@ -47,20 +47,20 @@ class Character:
     def to_text(self) -> str:
         text = ""
         text += f"# {self.name}\n\n"
-        text += f"## Origin Story:\n{self.origin_story}\n\n"
-        text += f"## Alignment:\n{self.alignment.value}\n\n"
-        text += "## Values:\n"
+        text += f"## Origin Story\n\n{self.origin_story}\n\n"
+        text += f"## Alignment\n\n{self.alignment.value}\n\n"
+        text += "## Values\n\n"
         for value in self.values:
             text += f"- {value}\n"
         # after values, add an additional newline
         text += "\n"
-        text += "## Objectives:\n"
+        text += "## Objectives\n\n"
         for objective in self.objectives:
             text += f"- {objective}\n"
         text += "\n"
-        text += "## Opinions:\n"
+        text += "## Opinions\n\n"
         for opinion in self.opinions:
-            text += f"### {opinion.title}\n{opinion.content}\n"
+            text += f"### {opinion.title}\n{opinion.content}\n\n"
         return text
 
     def save_to_markdown(self, file_path: Path):
