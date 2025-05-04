@@ -21,6 +21,20 @@ repos:
     rev: 0.7.2
     hooks:
       - id: uv-lock
+
+  - repo: https://github.com/pycqa/isort
+    rev: 5.12.0  # Updated to a newer version
+    hooks:
+    - id: isort
+      name: isort
+      entry: isort
+      stages: [pre-commit, pre-merge-commit, pre-push, manual]
+      require_serial: true
+      language: python
+      types_or: [cython, pyi, python]
+      args: ['--filter-files']
+      # Removed additional_dependencies: ["toml"]
+
   - repo: https://github.com/astral-sh/ruff-pre-commit
     # Ruff version.
     rev: v0.11.8
